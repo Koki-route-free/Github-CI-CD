@@ -1,26 +1,20 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/2.0/configuration-reference
+# バージョンの指定
 version: 2.1
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+# マシーンのイメージを指定します
 jobs:
   say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+# ここで実行したいコマンドをrunの後ろにつづけて記述していきます。今回であれば"echo Hello, World!"とゆうコマンドを入力することです。nameは特に意味はありません。
     steps:
       - checkout
       - run:
           name: "Say hello"
           command: "echo Hello, World!"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+# 最後に実行手順の記述をします。今回は一つしかないので順番はありませんが上から順に実行されていきます。基本的には処理の早いものから記述していきます
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+# 他にも追加で記述できることはたくさんあります公式ドキュメント’https://circleci.com/docs/ja/’を参照ください
